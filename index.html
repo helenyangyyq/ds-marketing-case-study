@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Helen Yang | DS Marketing Case Study</title>
+    <meta
+      name="description"
+      content="A DS marketing case study by Helen Yang covering data cleaning, marketing mix modeling, simulation, and budget optimization."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Helen Yang · DS Marketing Case Study</p>
+          <h1>Marketing mix modeling for TV campaign performance</h1>
+          <p class="lede">
+            This case study starts with messy Silver-layer campaign data and ends
+            with a business recommendation: which channels drive viewership, how
+            performance changes under a digital spend shock, and how to reallocate
+            budget to maximize revenue.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="assets/ds-marketing-case-study.pdf" target="_blank" rel="noreferrer">
+              Open case study PDF
+            </a>
+            <a class="button button-secondary" href="assets/ds-marketing-case-study.py" target="_blank" rel="noreferrer">
+              View Python code
+            </a>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <p class="panel-label">At a glance</p>
+          <ul class="panel-list">
+            <li>3,143 raw rows reviewed</li>
+            <li>399 exact duplicates removed</li>
+            <li>420 weekly Gold-layer observations</li>
+            <li>Best model test R²: 0.9135</li>
+          </ul>
+        </aside>
+      </header>
+
+      <main>
+        <section class="stats-grid" aria-label="Key outcomes">
+          <article class="stat-card">
+            <p class="stat-label">Best channel mix</p>
+            <p class="stat-value">40% / 60% / 0%</p>
+            <p class="stat-note">Network TV / Cable TV / Digital</p>
+          </article>
+          <article class="stat-card">
+            <p class="stat-label">Predicted revenue lift</p>
+            <p class="stat-value">+$650K</p>
+            <p class="stat-note">+8.7% vs. baseline allocation</p>
+          </article>
+          <article class="stat-card">
+            <p class="stat-label">Digital simulation uplift</p>
+            <p class="stat-value">+266,816</p>
+            <p class="stat-note">Predicted viewers in the test period</p>
+          </article>
+          <article class="stat-card">
+            <p class="stat-label">Channel ranking</p>
+            <p class="stat-value">Cable &gt; Network &gt; Digital</p>
+            <p class="stat-note">Stable across all model variants</p>
+          </article>
+        </section>
+
+        <section class="section-grid">
+          <article class="content-card">
+            <p class="section-kicker">Business question</p>
+            <h2>What makes this case interesting</h2>
+            <p>
+              The project combines data engineering and modeling. The data arrives
+              at a daily episode level with missing values and duplicate rows, but
+              the business questions are weekly and strategic: where to invest, how
+              to measure channel impact, and how confident to be in optimization
+              results.
+            </p>
+            <p>
+              I treated the work as an end-to-end product: clean the source data,
+              define a Gold reporting layer, estimate response curves, simulate a
+              policy change, and translate the model into a media budget decision.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <p class="section-kicker">What I shipped</p>
+            <h2>Deliverables</h2>
+            <ul class="clean-list">
+              <li>A cleaned Gold weekly dataset built from Silver daily records</li>
+              <li>Campaign reporting tables with CPM and ROAS views</li>
+              <li>Three MMM variants: baseline, adstock, and adstock + saturation</li>
+              <li>A digital spend +20% scenario simulation</li>
+              <li>A constrained budget reallocation exercise tied to revenue</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="content-card full-width">
+          <p class="section-kicker">Workflow</p>
+          <h2>How the analysis was structured</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-step">01</span>
+              <div>
+                <h3>Audit the Silver data</h3>
+                <p>
+                  Profiled the schema, checked lifecycle consistency by show and
+                  season, quantified missingness, and identified exact duplicates.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-step">02</span>
+              <div>
+                <h3>Build the Gold reporting layer</h3>
+                <p>
+                  Imputed missing values within the same episode-week, removed
+                  duplicates, and aggregated the daily data into a weekly episode
+                  grain suitable for reporting and MMM.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-step">03</span>
+              <div>
+                <h3>Model channel impact</h3>
+                <p>
+                  Compared a baseline log-spend OLS, an adstock model, and an
+                  adstock-plus-saturation MMM using per-show time-based splits.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-step">04</span>
+              <div>
+                <h3>Translate the model into decisions</h3>
+                <p>
+                  Simulated a digital investment increase, then searched for a more
+                  profitable channel mix while keeping total budget fixed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-grid">
+          <article class="content-card">
+            <p class="section-kicker">Model comparison</p>
+            <h2>Why Model 2 won</h2>
+            <div class="mini-table">
+              <div class="mini-row mini-head">
+                <span>Model</span>
+                <span>Test R²</span>
+              </div>
+              <div class="mini-row">
+                <span>Baseline log-spend OLS</span>
+                <span>0.8956</span>
+              </div>
+              <div class="mini-row">
+                <span>Adstock MMM</span>
+                <span>0.9097</span>
+              </div>
+              <div class="mini-row">
+                <span>Adstock + saturation MMM</span>
+                <span>0.9135</span>
+              </div>
+            </div>
+            <p class="small-copy">
+              The final model captured both carryover and diminishing returns,
+              making it the most realistic specification of media response in this
+              dataset.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <p class="section-kicker">Key interpretation</p>
+            <h2>What the business should take away</h2>
+            <ul class="clean-list">
+              <li>Cable TV is the strongest driver of incremental viewership.</li>
+              <li>Network TV also performs well and improves the best budget mix.</li>
+              <li>Digital remains positive, but weaker at the margin in this case.</li>
+              <li>Lead-in bonus has a meaningful positive effect on outcomes.</li>
+              <li>Holiday is not a strong explanatory factor after controls.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="content-card full-width">
+          <p class="section-kicker">Downloads</p>
+          <h2>Project files</h2>
+          <div class="download-grid">
+            <a class="download-card" href="assets/ds-marketing-case-study.pdf" target="_blank" rel="noreferrer">
+              <span class="download-type">PDF</span>
+              <strong>Case study write-up</strong>
+              <span>Readable review version with visuals and commentary</span>
+            </a>
+            <a class="download-card" href="assets/ds-marketing-case-study.py" target="_blank" rel="noreferrer">
+              <span class="download-type">PY</span>
+              <strong>Python script</strong>
+              <span>Full analysis logic in a plain code format</span>
+            </a>
+            <a class="download-card" href="assets/ds-marketing-case-study.ipynb" target="_blank" rel="noreferrer">
+              <span class="download-type">IPYNB</span>
+              <strong>Notebook</strong>
+              <span>Original notebook with outputs and narrative</span>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>
+          This portfolio page intentionally excludes the raw dataset and original
+          prompt from the public surface. It focuses on methodology, outcomes, and
+          deliverables that are safe to share in a job application.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
